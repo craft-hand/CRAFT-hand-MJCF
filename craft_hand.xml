@@ -1,0 +1,152 @@
+<mujoco model="craft_hand">
+    <compiler angle="degree"/>
+
+    <default>
+        <!-- convert the Fusion 360 coordinate system to MuJoCo -->
+        <geom type="mesh" xyaxes="1 0 0 0 0 1"/>
+        <joint armature="0.01"/>
+    </default>
+    <asset>
+        <!-- Fusion outputs meshes with mm units by default, but must be converted to m in MuJoCo, hence the scaling -->
+        <mesh name="base" file="base.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="index1" file="index1.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="index2" file="index2.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="index3" file="index3.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="index4" file="index4.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="middle1" file="middle1.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="middle2" file="middle2.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="middle3" file="middle3.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="middle4" file="middle4.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="ring1" file="ring1.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="ring2" file="ring2.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="ring3" file="ring3.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="ring4" file="ring4.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="pinky1" file="pinky1.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="pinky2" file="pinky2.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="pinky3" file="pinky3.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="pinky4" file="pinky4.stl" scale="0.001 0.001 0.001"/>
+    </asset>
+    <worldbody>
+        <body name="base">
+            <geom mesh="base"/>
+            <!-- Index finger -->
+            <body name="index1">
+                <joint name="index_1" pos="-0.008969 -0.092739 -0.068253" axis="0 1 0" limited="true" range="-45 45"/>
+                <geom mesh="index1"/>
+                <body name="index2">
+                    <joint name="index_2" pos="-0.0139 -0.0821 -0.0862" axis="-1 0 0" limited="true" range="0 90"/>
+                    <geom mesh="index2"/>
+                    <body name="index3">
+                        <joint name="index_3" pos="-0.016077 -0.086888 -0.131325" axis="-1 0 0" limited="true" range="0 110"/>
+                        <geom mesh="index3"/>
+                        <body name="index4">
+                            <joint name="index_4" pos="-0.0161 -0.0869 -0.1547" axis="-1 0 0" limited="true" range="0 110"/>
+                            <geom mesh="index4"/>
+                        </body>
+                    </body>
+                </body>
+            </body>
+            <!-- Middle finger -->
+            <body name="middle1">
+                <joint name="middle_1" pos="0.012 -0.0927 -0.0783" axis="0 1 0" limited="true" range="-45 45"/>
+                <geom mesh="middle1"/>
+                <body name="middle2">
+                    <joint name="middle_2" pos="0.0085 -0.0821 -0.0962" axis="-1 0 0" limited="true" range="0 90"/>
+                    <geom mesh="middle2"/>
+                    <body name="middle3">
+                        <joint name="middle_3" pos="0.0107 -0.0859 -0.142" axis="-1 0 0" limited="true" range="0 110"/>
+                        <geom mesh="middle3"/>
+                        <body name="middle4">
+                            <joint name="middle_4" pos="0.0107 -0.0859 -0.164" axis="-1 0 0" limited="true" range="0 110"/>
+                            <geom mesh="middle4"/>
+                        </body>
+                    </body>
+                </body>
+            </body>
+            <!-- Ring finger -->
+            <body name="ring1">
+                <joint name="ring_1" pos="0.033 -0.0927 -0.0683" axis="0 1 0" limited="true" range="-45 45"/>
+                <geom mesh="ring1"/>
+                <body name="ring2">
+                    <joint name="ring_2" pos="0.0293 -0.0821 -0.0862" axis="-1 0 0" limited="true" range="0 90"/>
+                    <geom mesh="ring2"/>
+                    <body name="ring3">
+                        <joint name="ring_3" pos="0.0301 -0.0859 -0.132" axis="-1 0 0" limited="true" range="0 110"/>
+                        <geom mesh="ring3"/>
+                        <body name="ring4">
+                            <joint name="ring_4" pos="0.0315 -0.0859 -0.154" axis="-1 0 0" limited="true" range="0 110"/>
+                            <geom mesh="ring4"/>
+                        </body>
+                    </body>
+                </body>
+            </body>
+            <!-- Pinky finger -->
+            <body name="pinky1">
+                <joint name="pinky_1" pos="0.054 -0.0927 -0.0583" axis="0 1 0" limited="true" range="-45 45"/>
+                <geom mesh="pinky1"/>
+                <body name="pinky2">
+                    <joint name="pinky_2" pos="0.0574 -0.0821 -0.0762" axis="-1 0 0" limited="true" range="0 90"/>
+                    <geom mesh="pinky2"/>
+                    <body name="pinky3">
+                        <joint name="pinky_3" pos="0.0525 -0.0859 -0.122" axis="-1 0 0" limited="true" range="0 110"/>
+                        <geom mesh="pinky3"/>
+                        <body name="pinky4">
+                            <joint name="pinky_4" pos="0.0525 -0.0859 -0.144" axis="-1 0 0" limited="true" range="0 110"/>
+                            <geom mesh="pinky4"/>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+
+    <contact>
+        <!-- Index finger exclusions -->
+        <exclude body1="base" body2="index1"/>
+        <exclude body1="index1" body2="index2"/>
+        <exclude body1="index2" body2="index3"/>
+        <exclude body1="index3" body2="index4"/>
+        <!-- Middle finger exclusions -->
+        <exclude body1="base" body2="middle1"/>
+        <exclude body1="middle1" body2="middle2"/>
+        <exclude body1="middle2" body2="middle3"/>
+        <exclude body1="middle3" body2="middle4"/>
+        <!-- Ring finger exclusions -->
+        <exclude body1="base" body2="ring1"/>
+        <exclude body1="ring1" body2="ring2"/>
+        <exclude body1="ring2" body2="ring3"/>
+        <exclude body1="ring3" body2="ring4"/>
+        <!-- Pinky finger exclusions -->
+        <exclude body1="base" body2="pinky1"/>
+        <exclude body1="pinky1" body2="pinky2"/>
+        <exclude body1="pinky2" body2="pinky3"/>
+        <exclude body1="pinky3" body2="pinky4"/>
+    </contact>
+
+    <equality>
+        <!-- Joint 4 mirrors Joint 3 for each finger -->
+        <joint joint1="index_3" joint2="index_4" polycoef="0 1 0 0 0"/>
+        <joint joint1="middle_3" joint2="middle_4" polycoef="0 1 0 0 0"/>
+        <joint joint1="ring_3" joint2="ring_4" polycoef="0 1 0 0 0"/>
+        <joint joint1="pinky_3" joint2="pinky_4" polycoef="0 1 0 0 0"/>
+    </equality>
+
+    <actuator>
+        <!-- Index finger -->
+        <position name="index_1" joint="index_1" ctrllimited="true" ctrlrange="-45 45" kp="0.5" kv="0.1"/>
+        <position name="index_2" joint="index_2" ctrllimited="true" ctrlrange="0 90" kp="0.5" kv="0.1"/>
+        <position name="index_3" joint="index_3" ctrllimited="true" ctrlrange="0 110" kp="0.1" kv="0.1"/>
+        <!-- Middle finger -->
+        <position name="middle_1" joint="middle_1" ctrllimited="true" ctrlrange="-45 45" kp="0.5" kv="0.1"/>
+        <position name="middle_2" joint="middle_2" ctrllimited="true" ctrlrange="0 90" kp="0.5" kv="0.1"/>
+        <position name="middle_3" joint="middle_3" ctrllimited="true" ctrlrange="0 110" kp="0.1" kv="0.1"/>
+        <!-- Ring finger -->
+        <position name="ring_1" joint="ring_1" ctrllimited="true" ctrlrange="-45 45" kp="0.5" kv="0.1"/>
+        <position name="ring_2" joint="ring_2" ctrllimited="true" ctrlrange="0 90" kp="0.5" kv="0.1"/>
+        <position name="ring_3" joint="ring_3" ctrllimited="true" ctrlrange="0 110" kp="0.1" kv="0.1"/>
+        <!-- Pinky finger -->
+        <position name="pinky_1" joint="pinky_1" ctrllimited="true" ctrlrange="-45 45" kp="0.5" kv="0.1"/>
+        <position name="pinky_2" joint="pinky_2" ctrllimited="true" ctrlrange="0 90" kp="0.5" kv="0.1"/>
+        <position name="pinky_3" joint="pinky_3" ctrllimited="true" ctrlrange="0 110" kp="0.1" kv="0.1"/>
+    </actuator>
+</mujoco>

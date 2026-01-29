@@ -1,0 +1,25 @@
+CRAFT HAND - MuJoCo Notes
+==========================
+
+Fusion 360 to MuJoCo Coordinate Transform
+-----------------------------------------
+When using xyaxes="1 0 0 0 0 1" to convert Fusion 360 coordinates to MuJoCo:
+
+  Fusion 360 (mm)  →  MuJoCo (m)
+  X                →   X / 1000
+  Y                →   Z / 1000
+  Z                →  -Y / 1000   ← NEGATED!
+
+Why the negation?
+  xyaxes defines mesh orientation via X and Y axes.
+  The Z axis is computed by cross product: X × Y = (1,0,0) × (0,0,1) = (0,-1,0)
+  This makes Fusion Z map to MuJoCo -Y.
+
+Example:
+  Fusion: (-13.9, -86.2, 82.1) mm
+  MuJoCo: (-0.0139, -0.0821, -0.0862) m
+
+Formula:
+  mujoco_x =  fusion_x / 1000
+  mujoco_y = -fusion_z / 1000
+  mujoco_z =  fusion_y / 1000
