@@ -25,6 +25,10 @@
         <mesh name="pinky2" file="pinky2.stl" scale="0.001 0.001 0.001"/>
         <mesh name="pinky3" file="pinky3.stl" scale="0.001 0.001 0.001"/>
         <mesh name="pinky4" file="pinky4.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="thumbmcp" file="ThumbMCP.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="thumb2" file="thumb2.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="thumb3" file="thumb3.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="thumb4" file="thumb4.stl" scale="0.001 0.001 0.001"/>
     </asset>
     <worldbody>
         <body name="base">
@@ -97,6 +101,23 @@
                     </body>
                 </body>
             </body>
+            <!-- Thumb -->
+            <body name="thumbmcp">
+                <joint name="thumb_mcp" pos="0.006 -0.092 -0.029" axis="-0.57 0 -0.82" limited="true" range="-170 0"/>
+                <geom mesh="thumbmcp"/>
+                <body name="thumb2">
+                    <joint name="thumb_2" pos="-0.013 -0.100 -0.022" axis="0 1 0" limited="true" range="0 90"/>
+                    <geom mesh="thumb2"/>
+                    <body name="thumb3">
+                        <joint name="thumb_3" pos="-0.034 -0.098 -0.063" axis="-0.47 -0.82 0.33" limited="true" range="0 110"/>
+                        <geom mesh="thumb3"/>
+                        <body name="thumb4">
+                            <joint name="thumb_4" pos="-0.047 -0.096 -0.081" axis="-0.48 -0.84 0.27" limited="true" range="0 110"/>
+                            <geom mesh="thumb4"/>
+                        </body>
+                    </body>
+                </body>
+            </body>
         </body>
     </worldbody>
 
@@ -121,6 +142,11 @@
         <exclude body1="pinky1" body2="pinky2"/>
         <exclude body1="pinky2" body2="pinky3"/>
         <exclude body1="pinky3" body2="pinky4"/>
+        <!-- Thumb exclusions -->
+        <exclude body1="base" body2="thumbmcp"/>
+        <exclude body1="thumbmcp" body2="thumb2"/>
+        <exclude body1="thumb2" body2="thumb3"/>
+        <exclude body1="thumb3" body2="thumb4"/>
     </contact>
 
     <equality>
@@ -129,6 +155,7 @@
         <joint joint1="middle_3" joint2="middle_4" polycoef="0 1 0 0 0"/>
         <joint joint1="ring_3" joint2="ring_4" polycoef="0 1 0 0 0"/>
         <joint joint1="pinky_3" joint2="pinky_4" polycoef="0 1 0 0 0"/>
+        <joint joint1="thumb_3" joint2="thumb_4" polycoef="0 1 0 0 0"/>
     </equality>
 
     <actuator>
@@ -148,5 +175,9 @@
         <position name="pinky_1" joint="pinky_1" ctrllimited="true" ctrlrange="-45 45" kp="0.5" kv="0.1"/>
         <position name="pinky_2" joint="pinky_2" ctrllimited="true" ctrlrange="0 90" kp="0.5" kv="0.1"/>
         <position name="pinky_3" joint="pinky_3" ctrllimited="true" ctrlrange="0 110" kp="0.1" kv="0.1"/>
+        <!-- Thumb -->
+        <position name="thumb_mcp" joint="thumb_mcp" ctrllimited="true" ctrlrange="-45 45" kp="0.5" kv="0.1"/>
+        <position name="thumb_2" joint="thumb_2" ctrllimited="true" ctrlrange="0 90" kp="0.5" kv="0.1"/>
+        <position name="thumb_3" joint="thumb_3" ctrllimited="true" ctrlrange="0 110" kp="0.1" kv="0.1"/>
     </actuator>
 </mujoco>
