@@ -1,5 +1,10 @@
 <mujoco model="craft_hand">
     <compiler angle="degree"/>
+    <visual>
+        <global offwidth="1920" offheight="1080"/>
+        <quality shadowsize="4096" offsamples="8"/>
+        <map znear="0.001" zfar="10"/>
+    </visual>
 
     <default>
         <!-- convert the Fusion 360 coordinate system to MuJoCo -->
@@ -7,6 +12,12 @@
         <joint armature="0.01"/>
     </default>
     <asset>
+        <!-- Checkerboard floor texture -->
+        <texture name="grid" type="2d" builtin="checker" width="2048" height="2048" rgb1="0.1 0.2 0.3" rgb2="0.2 0.3 0.4"/>
+        <material name="grid" texture="grid" texrepeat="8 8" reflectance="0.2"/>
+        <!-- Tennis ball texture -->
+        <texture name="tennis" type="2d" builtin="flat" width="512" height="512" rgb1="1.0 1.0 0.0" rgb2="1.0 1.0 0.0"/>
+        <material name="tennis" texture="tennis" texuniform="true" reflectance="0.05"/>
         <!-- Fusion outputs meshes with mm units by default, but must be converted to m in MuJoCo, hence the scaling -->
         <mesh name="base" file="base.stl" scale="0.001 0.001 0.001"/>
         <mesh name="index1" file="index1.stl" scale="0.001 0.001 0.001"/>
@@ -30,7 +41,19 @@
         <mesh name="thumb3" file="thumb3.stl" scale="0.001 0.001 0.001"/>
         <mesh name="thumb4" file="thumb4.stl" scale="0.001 0.001 0.001"/>
     </asset>
-    <worldbody>
+
+z    <worldbody>
+        <light pos="0 -0.5 0.5" dir="0 1 -0.5" diffuse="1 1 1"/>
+        <geom name="floor" type="plane" size="0.5 0.5 0.01" rgba="0.9 0.9 0.9 1" material="grid"/>
+        <camera name="front" pos="0 -0.45 -0.3" xyaxes="1 0 0 0 -0.5 1"/>
+        <camera name="top" pos="0 -0.05 0.3" xyaxes="1 0 0 0 -1 0"/>
+        <camera name="side" pos="0.4 -0.1 -0.1" xyaxes="0 -1 0 0 0 1"/>
+        <!-- Cube on palm -->
+        <!-- Tennis ball on palm -->
+        <body name="ball" pos="0.02 -0.12 -0.08">
+            <freejoint/>
+            <geom type="sphere" size="0.028" material="tennis" mass="0.057"/>
+        </body>
         <body name="base">
             <geom mesh="base"/>
             <!-- Index finger -->
