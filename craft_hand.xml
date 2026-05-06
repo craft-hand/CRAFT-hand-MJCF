@@ -1,14 +1,14 @@
 <mujoco model="craft_hand">
-    <compiler angle="degree"/>
+    <compiler angle="degree" meshdir="meshes"/>
     <visual>
         <global offwidth="1920" offheight="1080"/>
-        <quality shadowsize="4096" offsamples="8"/>
+        <quality shadowsize="0" offsamples="8"/>
         <map znear="0.001" zfar="10"/>
     </visual>
 
     <default>
         <!-- convert the Fusion 360 coordinate system to MuJoCo -->
-        <geom type="mesh" xyaxes="1 0 0 0 0 1"/>
+        <geom type="mesh" xyaxes="1 0 0 0 0 1" rgba="0.54 0.55 0.55 1"/>
         <joint armature="0.01"/>
     </default>
     <asset>
@@ -42,26 +42,22 @@
         <mesh name="thumb4" file="thumb4.stl" scale="0.001 0.001 0.001"/>
     </asset>
 
-z    <worldbody>
-        <light pos="0 -0.5 0.5" dir="0 1 -0.5" diffuse="1 1 1"/>
+    <worldbody>
+        <light pos="0.2 -0.1 0.05" dir="-0.73 0 -0.69" diffuse="1 1 1"/>
         <geom name="floor" type="plane" size="0.5 0.5 0.01" rgba="0.9 0.9 0.9 1" material="grid"/>
+        <!-- Bolt (cylinder) at trajectory center - axis along Y -->
+        <geom name="bolt" type="cylinder" pos="0 -0.12 -0.12" size="0.006 0.025" rgba="0.5 0.45 0.4 1" euler="90 0 0"/>
         <camera name="front" pos="0 -0.45 -0.3" xyaxes="1 0 0 0 -0.5 1"/>
         <camera name="top" pos="0 -0.05 0.3" xyaxes="1 0 0 0 -1 0"/>
         <camera name="side" pos="0.4 -0.1 -0.1" xyaxes="0 -1 0 0 0 1"/>
-        <!-- Cube on palm -->
-        <!-- Tennis ball on palm -->
-        <body name="ball" pos="0.02 -0.12 -0.08">
-            <freejoint/>
-            <geom type="sphere" size="0.028" material="tennis" mass="0.057"/>
-        </body>
         <body name="base">
             <geom mesh="base"/>
             <!-- Index finger -->
             <body name="index1">
-                <joint name="index_1" pos="-0.008969 -0.092739 -0.068253" axis="0 1 0" limited="true" range="-45 45"/>
+                <joint name="index_1" pos="-0.008969 -0.092739 -0.068253" axis="0 1 0" limited="true" range="-10 45"/>
                 <geom mesh="index1"/>
                 <body name="index2">
-                    <joint name="index_2" pos="-0.0139 -0.0821 -0.0862" axis="-1 0 0" limited="true" range="0 90"/>
+                    <joint name="index_2" pos="-0.0139 -0.0821 -0.0862" axis="-1 0 0" limited="true" range="0 120"/>
                     <geom mesh="index2"/>
                     <body name="index3">
                         <joint name="index_3" pos="-0.016077 -0.086888 -0.131325" axis="-1 0 0" limited="true" range="0 110"/>
@@ -69,6 +65,7 @@ z    <worldbody>
                         <body name="index4">
                             <joint name="index_4" pos="-0.0161 -0.0869 -0.1547" axis="-1 0 0" limited="true" range="0 110"/>
                             <geom mesh="index4"/>
+                            <site name="index_tip" pos="0 -0.012 -0.015" size="0.001"/>
                         </body>
                     </body>
                 </body>
@@ -86,6 +83,7 @@ z    <worldbody>
                         <body name="middle4">
                             <joint name="middle_4" pos="0.0107 -0.0859 -0.164" axis="-1 0 0" limited="true" range="0 110"/>
                             <geom mesh="middle4"/>
+                            <site name="middle_tip" pos="0 -0.012 -0.015" size="0.001"/>
                         </body>
                     </body>
                 </body>
@@ -137,6 +135,7 @@ z    <worldbody>
                         <body name="thumb4">
                             <joint name="thumb_4" pos="-0.047 -0.096 -0.081" axis="-0.48 -0.84 0.27" limited="true" range="0 110"/>
                             <geom mesh="thumb4"/>
+                            <site name="thumb_tip" pos="0 -0.012 -0.015" size="0.001"/>
                         </body>
                     </body>
                 </body>

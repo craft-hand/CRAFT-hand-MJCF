@@ -1,1 +1,1 @@
-# CRAFT-hand-URDF
+# CRAFT-hand-MJCF
